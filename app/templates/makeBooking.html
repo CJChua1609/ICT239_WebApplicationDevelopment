@@ -1,0 +1,36 @@
+{% from "_render_field.html" import render_field %}
+{% extends "base.html" %}
+{% block mainblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-4 col-sm-4 p-2">
+            <div class="card card-common">
+                <img src="{{ current_course.img_url }}" alt="image">
+                <div class="card-header">
+                    <h5>{{ current_course.course }}</h5>
+                </div>
+                <div class="card-body">
+                    {{ current_course.description }}
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-sm-8 p-2 d-flex">
+            <div class="card card-common w-100">
+                <div class="card-header">
+                    <h5>Select Tee Off Time</h5>
+                </div>
+                <div class="card-body m-4">
+                    <form action="/makeBooking" method="POST">
+                            {{ render_field(form.tee_time, placeholder="Enter datetime") }}
+                        <input type="hidden" value='{{current_course.course}}' name="course">
+                        <div>
+                            <button type="submit" class="btn btn-primary my-4" value="makeBooking">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
